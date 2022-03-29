@@ -57,31 +57,29 @@ function createDivsForColors(colorArray) {
   }
 }
 
-let pickArr = [];
+  let pickArr = [];
 // TODO: Implement this function!
 function handleCardClick(event) {
 
   if (pickArr.length < 2) {
 
+    //get pick and its index
     let pick = event.target;
     let pickIndex = Array.from(pick.parentElement.children).indexOf(pick);
     pick.style.backgroundColor = pick.className;
 
-    const my_element = { element: pick, index: pickIndex }
-
     const ELEMENT = 0;
     const ELEMENT_INDEX = 1;
-
-
-    if (pickArr.length === 1 && pickArr[ELEMENT][ELEMENT_INDEX] === pickIndex) return;
     
-    pickArr.push(my_element)
+    //cant pick the same card twice
+    if (pickArr.length === 1 && pickArr[ELEMENT][ELEMENT_INDEX] === pickIndex) return;
+    pickArr.push([pick, pickIndex])
 
+    //compare picks
     if (pickArr.length >= 2) {
       if (pickArr[0][0].className === pickArr[1][0].className && pickArr[0][1] != pickArr[1][1]) {
         console.log('Match!');
         pickArr = [];
-        //while (pickArr.length) {pickArr.pop()};
 
     } else {
 
@@ -89,7 +87,6 @@ function handleCardClick(event) {
         pickArr[0][0].style.backgroundColor = '';
         pickArr[1][0].style.backgroundColor = '';
         pickArr = [];
-        //while (pickArr.length) {pickArr.pop()};
       }, 1000)
 
     }
